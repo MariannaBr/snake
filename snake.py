@@ -1,5 +1,6 @@
 from turtle import Turtle
 
+positions = [(0, 0), (-20, 0), (-40, 0)]
 UP = 90.0
 DOWN = 270.0
 RIGHT = 0.0
@@ -13,13 +14,19 @@ class Snake:
         self.head = self.snake[0]
 
     def create_snake(self):
-        for i in range(3):
-            new_tile = Turtle()
-            new_tile.shape("square")
-            new_tile.color("white")
-            new_tile.penup()
-            new_tile.setposition(x=-20*i, y=0)
-            self.snake.append(new_tile)
+        for position in positions:
+            self.add_tile(position)
+
+    def add_tile(self, position):
+        new_tile = Turtle()
+        new_tile.shape("square")
+        new_tile.color("white")
+        new_tile.penup()
+        new_tile.goto(position)
+        self.snake.append(new_tile)
+
+    def extend(self):
+        self.add_tile(self.snake[-1].position())
 
     def move(self):
         for i in range(len(self.snake) - 1, 0, -1):
