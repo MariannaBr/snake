@@ -28,6 +28,13 @@ class Snake:
     def extend(self):
         self.add_tile(self.snake[-1].position())
 
+    def reset(self):
+        for tile in self.snake:
+            tile.goto(1000,1000)
+        self.snake.clear()
+        self.create_snake()
+        self.head = self.snake[0]
+
     def move(self):
         for i in range(len(self.snake) - 1, 0, -1):
             new_x = self.snake[i - 1].xcor()
